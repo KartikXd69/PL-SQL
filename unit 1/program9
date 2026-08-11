@@ -1,0 +1,64 @@
+/*
+
+Program 9: (P9.SQL)
+===============================================================================
+Program Definition:
+===============================================================================
+Write a PL/SQL block to calculate Simple Interest based on the given
+Principal Amount, Rate of Interest, and Number of Years.
+
+Formula:
+--------
+Simple Interest (SI) = (P × R × T) / 100
+
+Where:
+P = Principal Amount
+R = Rate of Interest per annum (%)
+T = Time in Years
+
+Total Amount = Principal Amount + Simple Interest
+===============================================================================
+
+*/
+
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+SET FEEDBACK OFF
+
+DECLARE
+    v_principal   NUMBER(10,2);
+    v_rate        NUMBER(5,2);
+    v_years       NUMBER(5,2);
+    v_interest    NUMBER(10,2);
+    v_amount      NUMBER(10,2);
+BEGIN
+
+    -- Accept input from the user
+    v_principal := &principal;
+    v_rate      := &rate;
+    v_years     := &years;
+
+    -- Calculate Simple Interest
+    v_interest := (v_principal * v_rate * v_years) / 100;
+
+    -- Calculate Total Amount
+    v_amount := v_principal + v_interest;
+
+    -- Display result
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE('        SIMPLE INTEREST CALCULATION');
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE('Principal Amount : Rs. ' || v_principal);
+    DBMS_OUTPUT.PUT_LINE('Rate of Interest : ' || v_rate || ' %');
+    DBMS_OUTPUT.PUT_LINE('Number of Years  : ' || v_years);
+    DBMS_OUTPUT.PUT_LINE('------------------------------------------');
+    DBMS_OUTPUT.PUT_LINE('Simple Interest  : Rs. ' || v_interest);
+    DBMS_OUTPUT.PUT_LINE('Total Amount     : Rs. ' || v_amount);
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+
+END;
+/
+
+SET SERVEROUTPUT OFF
+SET VERIFY ON
+SET FEEDBACK ON
