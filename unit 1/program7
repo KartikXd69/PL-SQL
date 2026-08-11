@@ -1,0 +1,75 @@
+/*
+Program7:  (P7.SQL)
+
+Program Definition:
+-------------------
+Write a PL/SQL block to convert temperature between Celsius and
+Fahrenheit based on the user's choice.
+
+Formulas:
+---------
+1. Celsius to Fahrenheit:
+   Fahrenheit = (Celsius × 9/5) + 32
+
+2. Fahrenheit to Celsius:
+   Celsius = (Fahrenheit - 32) × 5/9
+
+User Choice:
+------------
+1 → Celsius to Fahrenheit
+2 → Fahrenheit to Celsius
+
+*/
+
+SET SERVEROUTPUT ON
+SET VERIFY OFF
+SET FEEDBACK OFF
+
+ACCEPT C PROMPT "Enter your choice give 1. Celsius to Fahrenheit or give 2. Fahrenheit to Celsius: "
+
+DECLARE
+    choice       NUMBER;
+    celsius      NUMBER;
+    fahrenheit   NUMBER;
+BEGIN
+    -- Display menu
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+    DBMS_OUTPUT.PUT_LINE('       TEMPERATURE CONVERSION	');
+
+    -- Accept user's choice
+    choice := &C;
+
+    IF choice = 1 THEN
+
+        -- Celsius to Fahrenheit
+        celsius := &celsius;
+
+        fahrenheit := (celsius * 9 / 5) + 32;
+
+        DBMS_OUTPUT.PUT_LINE('Celsius     : ' || celsius || ' C');
+        DBMS_OUTPUT.PUT_LINE('Fahrenheit  : ' || ROUND(fahrenheit, 2) || ' F');
+
+    ELSIF choice = 2 THEN
+
+        -- Fahrenheit to Celsius
+        fahrenheit := &fahrenheit;
+
+        celsius := (fahrenheit - 32) * 5 / 9;
+
+        DBMS_OUTPUT.PUT_LINE('Fahrenheit  : ' || fahrenheit || ' degree F');
+        DBMS_OUTPUT.PUT_LINE('Celsius     : ' || ROUND(celsius, 2) || ' degree C');
+
+    ELSE
+
+        DBMS_OUTPUT.PUT_LINE('Invalid choice! Please select 1 or 2.');
+
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('==========================================');
+
+END;
+/
+
+SET SERVEROUTPUT OFF
+SET VERIFY ON
+SET FEEDBACK ON
