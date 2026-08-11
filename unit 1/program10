@@ -1,0 +1,35 @@
+/* 
+Program 5: (P5.SQL)
+Write a PL/SQL block to calculate the square and cube of the given number. 
+*/
+
+SET SERVEROUTPUT ON
+SET FEEDBACK OFF
+SET VERIFY OFF
+
+DECLARE
+    V_NUM      	NUMBER;
+    V_SQUARE  	NUMBER;
+    V_CUBE     	NUMBER;
+
+BEGIN
+    V_NUM := &ENTER_NUMBER;
+
+    V_SQUARE := V_NUM * V_NUM;
+    V_CUBE := V_NUM * V_NUM * V_NUM;
+
+    DBMS_OUTPUT.PUT_LINE('========================================');
+    DBMS_OUTPUT.PUT_LINE('	SQUARE AND CUBE OF A NUMBER	');
+    DBMS_OUTPUT.PUT_LINE('========================================');
+
+    DBMS_OUTPUT.PUT_LINE('Entered Number : ' || V_NUM);
+    DBMS_OUTPUT.PUT_LINE('Square         : ' || V_SQUARE);
+    DBMS_OUTPUT.PUT_LINE('Cube           : ' || V_CUBE);
+
+    DBMS_OUTPUT.PUT_LINE('========================================');
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error : ' || SQLERRM);
+END;
+/
