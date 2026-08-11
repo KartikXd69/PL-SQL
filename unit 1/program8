@@ -1,0 +1,104 @@
+/*
+
+Program: 8 (P8.SQL)
+
+===============================================================================
+Program Definition:
+===============================================================================
+Write a PL/SQL block to accept an Employee ID (EID) from the user and delete
+the corresponding employee record from the EMP table.
+
+The program first checks whether the given EID exists in the EMP table.
+If the employee exists, the record is deleted and the transaction is committed.
+If the employee does not exist, an appropriate message is displayed.
+
+===============================================================================
+Step 1: Create EMP Table
+===============================================================================
+
+CREATE TABLE EMP
+(
+    EID       NUMBER(5) PRIMARY KEY,
+    ENAME     VARCHAR2(20),
+    DEPTNO    NUMBER(3),
+    DEPTNAME  VARCHAR2(15),
+    GENDER    CHAR(1),
+    AGE       NUMBER(2),
+    BASICSAL  NUMBER(10,2)
+);
+
+===============================================================================
+Step 2: Insert Sample Records
+===============================================================================
+
+INSERT INTO EMP VALUES (101,'RAHUL',10,'HR','M',28,25000);
+INSERT INTO EMP VALUES (102,'PRIYA',20,'SALES','F',30,30000);
+INSERT INTO EMP VALUES (103,'AMIT',30,'IT','M',27,35000);
+INSERT INTO EMP VALUES (104,'NEHA',40,'FINANCE','F',32,40000);
+
+COMMIT;
+
+SELECT * FROM EMP;
+
+===============================================================================
+Step 3: PL/SQL Block to Delete Employee Record
+===============================================================================
+
+1. Accept EID from the user.
+2. Check whether the employee with the given EID exists.
+3. If the employee exists, delete the record.
+4. Commit the transaction.
+5. Display a success message.
+6. If the employee does not exist, display an appropriate message.
+
+===============================================================================
+*/
+
+SET SERVEROUTPUT ON
+SET FEEDBACK OFF
+SET VERIFY OFF
+
+DECLARE
+    v_eid   EMP.EID%TYPE;
+    v_count NUMBER;
+BEGIN
+
+    -- Accept Employee ID from the user
+    v_eid := &EID;
+
+    -- Check whether employee exists
+    SELECT COUNT(*)
+    INTO v_count
+    FROM EMP
+    WHERE EID = v_eid;
+
+    IF v_count > 0 THEN
+
+        -- Delete employee record
+        DELETE FROM EMP
+        WHERE EID = v_eid;
+
+        -- Commit the transaction
+        COMMIT;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Employee record with EID ' || v_eid ||
+            ' has been deleted successfully.'
+        );
+
+    ELSE
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Employee record with EID ' || v_eid ||
+            ' does not exist.'
+        );
+
+    END IF;
+
+END;
+/
+
+
+SET SERVEROUTPUT OFF
+SET FEEDBACK ON
+SET VERIFY ON
